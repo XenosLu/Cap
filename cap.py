@@ -21,7 +21,7 @@ from github_oauth_async import GithubOauthAsync
 LOGIN = 'XenosLu'
 
 oauth = GithubOauthAsync()
-
+logging.info(os.environ.get('USER_LOGIN'))
 
 def authenticated_async(login=LOGIN):
     def decorator(func):
