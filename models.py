@@ -30,16 +30,6 @@ class BaseModel(Model):
         database = database
 
 
-class Image(BaseModel):
-    """docker image table, no longer used"""
-    id = CharField(primary_key=True)
-    name = CharField(null=True)
-    created = CharField(null=True)
-    task = CharField(null=True)
-    flag = CharField(null=True)
-    time = DateTimeField(default=datetime.datetime.now)
-
-
 class Task(BaseModel):
     """docker task table"""
     name = CharField(primary_key=True)
@@ -53,7 +43,7 @@ class Task(BaseModel):
     last_build_state = CharField(null=True)
 
 
-database.create_tables([Image, Task])
+database.create_tables([Task])
 
 
 if __name__ == '__main__':
