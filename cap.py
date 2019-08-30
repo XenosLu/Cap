@@ -217,7 +217,7 @@ SETTINGS = {
     'static_path': 'static',
     'template_path': '',
     'gzip': True,
-    "cookie_secret": 'cap',
+    "cookie_secret": 'cap_secret',
     'debug': True,
 }
 
