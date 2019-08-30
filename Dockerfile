@@ -4,9 +4,7 @@ LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
 COPY . /cap
 
-RUN apk add --no-cache \
-            git &&\
-    pip3 install -r /cap/requirements.txt &&\
+RUN pip3 install -r /cap/requirements.txt &&\
     rm -rf /root/.cache
 
 ENV GITHUB_CLIENT_ID ""
