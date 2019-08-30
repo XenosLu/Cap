@@ -1,0 +1,8 @@
+# docker==3.5.1
+tornado==6.0.3
+peewee==3.6.4
+pyyaml==5.1
+docker==3.6.0
+requests-async==0.6.2
+# # pip3 install docker==3.7.3 &&\
+# # pip3 install docker==4.0.2 &&\

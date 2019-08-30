@@ -1,0 +1,20 @@
+---
+kind: pipeline
+name: default
+
+steps:
+- name: build
+  image: xenocider/container:workspace
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker build -t cap:latest .
+  - docker stop cap_self_deploy
+  - docker rename cap_self_deploy cap_self_deploy-$(date "+%m%d-%H%M")
+  - docker run -itd -v /var/run/docker.sock:/var/run/docker.sock --name cap_self_deploy cap:latest "/usr/bin/python3" "/cap/self_deploy.py" "xenocider/cap:master"
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock

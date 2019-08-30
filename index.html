@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=1.0, user-scalable=0, minimal-ui">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="/static/css/icono.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-vue.css" rel="stylesheet">
+    <style>
+td {
+  white-space: nowrap;
+}
+.collapsed  .when-opened, :not(.collapsed) > h3 > .when-closed {
+  display: none;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 2em; /* Margin bottom by footer height */
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* height: 2em; */
+  line-height: 2em;
+}
+    </style>
+    <script src="/static/js/vue.min.js"></script>
+    <!-- <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script> -->
+    <script src="/static/js/bootstrap-vue.js"></script>
+    <title>Cap</title>
+  </head>
+<body>
+  <!-- alert box -->
+  <div id="v-alert" class="fixed-bottom">
+      <b-container>
+        <b-alert :show="dismissCountDown" :variant="class_style" @dismissed="dismissCountDown=0" @dismiss-count-down="countDownChanged" dismissible>
+           <strong>${ title }</strong> ${ content }
+        </b-alert>
+    </b-container>
+  </div>
+  <!-- alert box end -->
+  <!-- main interface -->
+  <div id=v-view class="container">
+    <!-- navbar -->
+    <b-navbar toggleable="md" type="dark" variant="secondary">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-brand>Docker Version: {{ version }}</b-navbar-brand>
+      <b-collapse is-nav id="nav_collapse">
+        <b-navbar-nav>
+          <b-nav-item onclick='server.pull()'>update</b-nav-item>
+          <b-nav-item @click="notify('test')">notify</b-nav-item>
+          <b-nav-item @click="test">RPC test</b-nav-item>
+        </b-navbar-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item>
+            <span>Unused Vol</span>
+            <b-badge variant="dark">${ unused_volumes }</b-badge>
+          </b-nav-item>
+          <!-- <input type="file"> -->
+          <b-nav-item-dropdown text="Prune" right>
+            <b-dropdown-item @click="pruneall">Prune All</b-dropdown-item>
+            <b-dropdown-item @click="prune('volumes')">Prune volume</b-dropdown-item>
+            <b-dropdown-item @click="prune('images')">Prune image</b-dropdown-item>
+            <b-dropdown-item @click="prune('containers')">Prune contianer</b-dropdown-item>
+            <b-dropdown-item onclick='server.reloadconfig()'>Reload config</b-dropdown-item>
+            <b-dropdown-item onclick='server.importconfig()'>Import config</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <!-- navbar end -->
+    <!-- image card view -->
+    <div class="card">
+      <div class="card-header btn" v-b-toggle.image-card-view>
+        <h3 class="card-title">Image Card View
+          <i class="when-opened icono-caretDownSquare"></i>
+          <i class="when-closed icono-caretRightSquare"></i>
+        </h3>
+      </div>
+      <b-collapse visible id="image-card-view">
+      <div class="card-body">
+        <div class="container">
+          <div class="row align-items-center mx-1" id="image-cards">
+            <!-- render loop start -->
+            <div v-for="image in images" class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-2" :key="image.tag">
+              <div class="card bg-light">
+                <div class="card-header btn" v-b-toggle="'image-card-' + image.tag">
+                  <h6 class="card-title">${ image.tag }</h6>
+                  <b-badge :variant="badge[image.status]">${ image.status }</b-badge>
+                  <b-badge v-show="image.last_build_state != 'Success'" :variant="badge[image.last_build_state]">${ image.last_build_state }</b-badge>
+                </div>
+                <b-collapse :id="'image-card-'+ image.tag">
+                  <div class="image-card">
+                    <b-list-group>
+                      <b-list-group-item>
+                        <small class="text-muted">id: </small>
+                        <span :style="'color:#' + image.id.substr(0, 6)">${ image.id }</span>
+                      </b-list-group-item>
+                      <b-list-group-item>
+                        <small class="text-muted">created: </small>${ image.created }
+                      </b-list-group-item>
+                      <b-list-group-item>
+                        <small class="text-muted">size: </small>${ image.size }
+                      </b-list-group-item>
+                      <b-list-group-item>
+                        <small class="text-muted">autodeploy: </small>
+                        <input :data-target="image.tag" v-model="image.autodeploy" type="checkbox" data-handle-width="20" data-label-width="18" data-on-color="success" data-on-text="" data-off-text="" />
+                      </b-list-group-item>
+                      <b-list-group-item @click="deployImage(image.tag)" variant="primary" button>
+                        Deploy
+                      </b-list-group-item>
+                      <b-list-group-item @click="removeImage(image.tag)" variant="danger" button>
+                        Remove
+                      </b-list-group-item>
+                    </b-list-group>
+                  </div>
+                </b-collapse>
+                <div class="card-footer text-center">
+                  <!-- <b-badge :variant="badge[image.last_build_state]">${ image.last_build_state }</b-badge> -->
+                  <!-- <br> -->
+                  <small class="text-muted">${ image.last_updated }</small>
+                </div>
+              </div>
+            </div>
+            <!-- render loop end -->
+          </div>
+        </div>
+      </div>
+      </b-collapse>
+    </div>
+    <!-- image card view end -->
+    <!-- image table view -->
+    <div class="card">
+      <div class="card-header btn" v-b-toggle.image-table-view>
+        <h3 class="card-title">Image Table View
+          <i class="when-opened icono-caretDownSquare"></i>
+          <i class="when-closed icono-caretRightSquare"></i>
+        </h3>
+      </div>
+      <b-collapse id="image-table-view" class="table-responsive-xl">
+        <table class="table table-hover table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th>DEPLOY</th>
+              <th>REPOSITORY</th>
+              <th>STATUS</th>
+              <th>IMAGE ID</th>
+              <th>CREATED</th>
+              <th>SIZE</th>
+              <th colspan="2">OPERATION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="image in images">
+              <td @click="deployImage(image.tag)">Deploy</td>
+              <td>${ image.tag }</td>
+              <td><b-badge :variant="badge[image.status]">${ image.status }</b-badge></td>
+              <td :style="'color:#'+image.id.substr(0, 6)">${ image.id }</td>
+              <td>${ image.created }</td>
+              <td>${ image.size }</td>
+              <td @click="removeImage(image.tag)">Remove</td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- </div> -->
+      </b-collapse>
+     </div>
+    <!-- image table view end-->
+    <!-- container view -->
+    <div id="v-container" class="card">
+      <div class="card-header btn" v-b-toggle.container-table-view>
+        <h3 class="card-title">Container View
+          <i class="when-opened icono-caretDownSquare"></i>
+          <i class="when-closed icono-caretRightSquare"></i>
+        </h3>
+      </div>
+      <b-collapse visible id="container-table-view">
+      <table class="table table-hover table-responsive-sm table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Created</th>
+            <th>Status</th>
+            <th colspan="2">OPERATIONS</th>
+            <th><a @click="prune('containers')">Prune</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="container in containers">
+            <td>${ container.name }</td>
+            <td>${ container.image }</td>
+            <td>${ container.created }</td>
+            <td><b-badge :variant="badge[container.status]">${ container.status }</b-badge></td>
+            <td @click="startContainer(container.id)">Start</td>
+            <td @click="stopContainer(container.id)">Stop</td>
+            <td @click="removeContainer(container.id)">Remove</td>
+          </tr>
+        </tbody>
+      </table>
+      </b-collapse>
+      <div class="card-footer"></div>
+    </div>
+    <!-- container view end -->
+  </div>
+  <!-- main interface end -->
+  <!-- footer -->
+  <footer class="text-center">
+    <small class="text-muted">&copy;2016-2018 Xenos' Cap</small>
+  </footer>
+  <!-- footer end-->
+</body>
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script src="/static/js/bootstrap-switch.js"></script>
+<script src={{ static_url('js/main.js') }}></script>
+<script>
+
+</script>
+</html>
