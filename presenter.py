@@ -151,7 +151,7 @@ def import_task():
 def import_config(config_file='task.yml'):
     """import task config from yaml config file"""
     with open(config_file) as file_read:
-        tasks = yaml.load(file_read.read())
+        tasks = yaml.safe_load(file_read.read())
         for task in tasks:
             Task.replace(**task).execute()
 
