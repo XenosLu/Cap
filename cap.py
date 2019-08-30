@@ -176,7 +176,7 @@ async def retrieve_state_coroutine():
     while True:
         try:
             state = get_state()
-            logging.info('retrieve_state')
+            logging.debug('retrieve_state')
             logging.debug(state)
         except Exception as exc:
             logging.info(exc, exc_info=True)
