@@ -84,7 +84,6 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
     async def open(self, *args, **kwargs):
         token = self.get_secure_cookie('github_access_token')
         logging.info(token)
-        logging.info(self.__bases__)
         # if not token:
             # self.redirect(oauth.authorize_redirect_url)
             # return
