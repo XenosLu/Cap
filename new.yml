@@ -8,6 +8,7 @@
     environment:
       GITHUB_CLIENT_ID: a29439e9083c8b200194
       GITHUB_CLIENT_SECRET: 9213df158932d25fa3256897f0b267cb2d1adacf
+      USER_LOGIN: XenosLu
     hostname: cap
     log_config:
       config:

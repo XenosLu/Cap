@@ -18,10 +18,12 @@ from presenter import update_job_coroutine, SLEEP_TIME  # not used
 from presenter import check_build_status_coroutine
 from github_oauth_async import GithubOauthAsync
 
+LOGIN = 'XenosLu'
+
 oauth = GithubOauthAsync()
 
 
-def authenticated_async(login='XenosLu'):
+def authenticated_async(login=LOGIN):
     def decorator(func):
         @wraps(func)
         async def wrapper(self, *args, **kwargs):
@@ -90,14 +92,13 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
         if not token:
             self.close(401)
             return
-        # token = token.decode()
-        # res = await oauth.get_user_with_cache(token)
-        # if not res.get('login') == login:
-            # self.send_error(401)
-            # return
-        # self.current_user = res.get('login')
-        
-        
+        token = token.decode()
+        res = await oauth.get_user_with_cache(token)
+        if not res.get('login') == LOGIN:
+            self.close(401)
+            return
+        self.current_user = res.get('login')
+
         self.write_message(self.last_message)
 
     # @tornado.concurrent.run_on_executor
