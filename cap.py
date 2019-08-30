@@ -73,7 +73,7 @@ class LoginHandler(tornado.web.RequestHandler):
 
 class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
     """Info retriever use web socket"""
-    executor = ThreadPoolExecutor(6)
+    executor = ThreadPoolExecutor(9)
     users = set()
     last_message = {}
 
