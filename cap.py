@@ -82,11 +82,7 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
     def data_received(self, chunk):
         pass
 
-    # @authenticated_async()
     async def open(self, *args, **kwargs):
-        logging.info('Websocket connected: %s', self.request.remote_ip)
-        self.users.add(self)
-        
         token = self.get_secure_cookie('github_access_token')
         logging.info(token)
         if not token:
@@ -99,6 +95,8 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
             return
         self.current_user = res.get('login')
 
+        logging.info('Websocket connected: %s', self.request.remote_ip)
+        self.users.add(self)
         self.write_message(self.last_message)
 
     # @tornado.concurrent.run_on_executor
@@ -113,7 +111,8 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         logging.info('ws close: %s', self.request.remote_ip)
-        self.users.remove(self)
+        if self in self.users:
+            self.users.remove(self)
 
     def write_message(self, message, binary=False):
         try:
