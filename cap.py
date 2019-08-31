@@ -32,6 +32,7 @@ def authenticated_async(login=LOGIN):
                 self.send_error(401)
                 return
             self.current_user = res.get('login')
+            logging.info('user login: %s' % self.current_user)
             await func(self, *args, **kwargs)
         return wrapper
     return decorator
