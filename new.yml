@@ -1,4 +1,3 @@
-
 - autodeploy: true
   containername: cap
   inheritvolume: true
@@ -24,7 +23,6 @@
       /var/run/docker.sock:
         bind: /var/run/docker.sock
         mode: rw
-        
 - containername: xapi
   name: xenocider/xapi:latest
   parameters:
