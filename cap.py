@@ -16,7 +16,7 @@ from presenter import VERSION, get_state, JavascriptRPC
 from presenter import update_job_generator
 from presenter import update_job_coroutine, SLEEP_TIME  # not used
 from presenter import check_build_status_coroutine
-from github_oauth_async import GithubOauthAsync
+from lib.github_oauth_async import GithubOauthAsync
 
 LOGIN = os.environ.get('USER_LOGIN')
 
