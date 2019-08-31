@@ -51,13 +51,16 @@ class GithubOauthAsync:
         response = await requests.get(url, headers=headers)
         return response.json()
 
-    async def get_user_with_cache(self, access_token):
+    async def get_user_with_cache(self, access_token=None):
+        if isinstance(access_token, bytes):
+            access_token = access_token.decode()
+        if not isinstance(access_token, str):
+            return {}
         response = self.user_list.get(access_token)
         if response:
             return response
         else:
             self.user_list[access_token] = await self.get_user(access_token)
-            print(self.user_list[access_token])
             return self.user_list[access_token]
 
 

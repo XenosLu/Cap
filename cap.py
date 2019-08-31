@@ -27,10 +27,6 @@ def authenticated_async(login=LOGIN):
         @wraps(func)
         async def wrapper(self, *args, **kwargs):
             token = self.get_secure_cookie('github_access_token')
-            if not token:
-                self.redirect(oauth.authorize_redirect_url)
-                return
-            token = token.decode()
             res = await oauth.get_user_with_cache(token)
             if not res.get('login') == login:
                 self.send_error(401)
@@ -83,11 +79,7 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
 
     async def open(self, *args, **kwargs):
         token = self.get_secure_cookie('github_access_token')
-        logging.info(token)
-        if not token:
-            self.close(401)
-            return
-        token = token.decode()
+        logging.debug(token)
         res = await oauth.get_user_with_cache(token)
         if not res.get('login') == LOGIN:
             self.close(401)
