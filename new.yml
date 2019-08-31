@@ -40,21 +40,3 @@
       /var/run/docker.sock:
         bind: /var/run/docker.sock
         mode: rw
-- containername: xlmp
-  name: xenocider/xlmp:latest
-  parameters:
-    detach: true
-    hostname: xlmp
-    log_config:
-      config:
-        syslog-address: tcp://nas:1514
-        tag: '{{.Name}}'
-      type: syslog
-    mac_address: 02:42:19:12:08:23
-    network_mode: qnet-dhcp-eth0-6d6da6
-    restart_policy:
-      Name: always
-    volumes:
-      /share/Multimedia/media:
-        bind: /xlmp/media
-        mode: rw
