@@ -21,7 +21,6 @@ from github_oauth_async import GithubOauthAsync
 LOGIN = 'XenosLu'
 
 oauth = GithubOauthAsync()
-logging.info(os.environ.get('USER_LOGIN'))
 
 def authenticated_async(login=LOGIN):
     def decorator(func):
@@ -239,7 +238,7 @@ loop.create_task(check_build_status_coroutine(LinkWebSocketHandler.callback_noti
 loop.create_task(retrieve_state_coroutine())
 
 LinkWebSocketHandler.run_task()
-
+logging.info(os.environ.get('USER_LOGIN'))
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))  # set file path as current
