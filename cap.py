@@ -18,7 +18,7 @@ from presenter import update_job_coroutine, SLEEP_TIME  # not used
 from presenter import check_build_status_coroutine
 from github_oauth_async import GithubOauthAsync
 
-LOGIN = 'XenosLu'
+LOGIN = os.environ.get('USER_LOGIN')
 
 oauth = GithubOauthAsync()
 
@@ -238,7 +238,6 @@ loop.create_task(check_build_status_coroutine(LinkWebSocketHandler.callback_noti
 loop.create_task(retrieve_state_coroutine())
 
 LinkWebSocketHandler.run_task()
-logging.info(os.environ.get('USER_LOGIN'))
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))  # set file path as current
