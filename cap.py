@@ -27,6 +27,8 @@ def authenticated_async(login=LOGIN):
         @wraps(func)
         async def wrapper(self, *args, **kwargs):
             token = self.get_secure_cookie('github_access_token')
+            if not token:
+                self.redirect(oauth.get_authorize_url())
             res = await oauth.get_user_with_cache(token)
             if not res.get('login') == login:
                 self.send_error(401)
