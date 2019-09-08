@@ -20,17 +20,6 @@ from models import Task
 UTC_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-class XDockerClient:
-    base_url = 'unix://var/run/docker.sock'
-    def __init__(self):
-        if sys.platform == 'win32':
-            self.base_url = 'http://127.0.0.1:2375'
-
-    def get_client(self):
-        return docker.DockerClient(base_url=self.base_url, version='auto', timeout=50)
-
-# docker_client = XDockerClient()
-# docker_client.get_client()
         
 def get_docker_client():
     """get docker client"""
