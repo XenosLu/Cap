@@ -11,12 +11,16 @@ from concurrent.futures import ThreadPoolExecutor
 
 import tornado.web
 import tornado.websocket
+from tornado.platform.asyncio import AnyThreadEventLoopPolicy
 
 from presenter import VERSION, get_state, JavascriptRPC
 from presenter import update_job_generator
 from presenter import update_job_coroutine, SLEEP_TIME  # not used
 from presenter import check_build_status_coroutine
 from lib.github_oauth_async import GithubOauthAsync
+
+
+asyncio.set_event_loop_policy(AnyThreadEventLoopPolicy())
 
 LOGIN = os.environ.get('USER_LOGIN')
 
@@ -108,13 +112,13 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
         if self in self.users:
             self.users.remove(self)
 
-    def write_message(self, message, binary=False):
-        try:
-            asyncio.get_event_loop()
-        except RuntimeError:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-        super().write_message(message, binary)
+    # def write_message(self, message, binary=False):
+        # try:
+            # asyncio.get_event_loop()
+        # except RuntimeError:
+            # loop = asyncio.new_event_loop()
+            # asyncio.set_event_loop(loop)
+        # super().write_message(message, binary)
 
     def callback_write_message(self, obj):
         """call back for write message using thread pool"""
