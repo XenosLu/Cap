@@ -391,14 +391,13 @@ def get_unused_volumes():
 async def get_buildhistory_coroutine(author='xenocider', name='cap', tag='master'):
     """get build history from docker hub"""
     url = 'https://hub.docker.com/v2/repositories/%s/%s/buildhistory/?page_size=3' % (author, name)
-    logging.info(url)
     status_map = {0: 'Queued', 2:'Building', 3: 'Building', 10: 'Success', -1: 'Error'}
     http = tornado.httpclient.AsyncHTTPClient()
     try:
         response = await http.fetch(url)
         result = json.loads(response.body.decode())
     except Exception as exc:
-        logging.info(exc, exc_info=True)
+        logging.info('%s \nurl: %s' % (exc, url), exc_info=True)
         return None
     results = result.get('results')
     logging.debug('%s/%s:%s', author, name, tag)
