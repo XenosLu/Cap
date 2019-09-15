@@ -1,39 +1,15 @@
 - autodeploy: true
-  containername: cap
+  containername: taskindocker
   inheritvolume: true
-  name: xenocider/cap:master
+  name: xenocider/taskindocker:latest
   parameters:
     detach: true
     environment:
-      GITHUB_CLIENT_ID: a29439e9083c8b200194
-      GITHUB_CLIENT_SECRET: 9213df158932d25fa3256897f0b267cb2d1adacf
       USER_LOGIN: XenosLu
     hostname: cap
-    log_config:
-      config:
-        syslog-address: tcp://nas:1514
-        tag: '{{.Name}}'
-      type: syslog
     network_mode: bridge
     ports:
-      8888/tcp: 18888
-    restart_policy:
-      Name: always
-    volumes:
-      /var/run/docker.sock:
-        bind: /var/run/docker.sock
-        mode: rw
-- containername: xapi
-  name: xenocider/xapi:latest
-  parameters:
-    detach: true
-    environment:
-      GITHUB_CLIENT_ID: a29439e9083c8b200194
-      GITHUB_CLIENT_SECRET: 9213df158932d25fa3256897f0b267cb2d1adacf
-      USER_LOGIN: XenosLu
-    hostname: xapi
-    mac_address: 02:42:7D:D4:DA:94
-    network_mode: qnet-dhcp-eth0-6d6da6
+      8888/tcp: 28888
     restart_policy:
       Name: always
     volumes:
