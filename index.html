@@ -136,41 +136,40 @@ footer {
     </div>
     <!-- image card view end -->
     <!-- image table view -->
-    <div class="card">
-      <div class="card-header btn" v-b-toggle.image-table-view>
-        <h3 class="card-title">Image Table View
-          <i class="when-opened icono-caretDownSquare"></i>
-          <i class="when-closed icono-caretRightSquare"></i>
-        </h3>
-      </div>
-      <b-collapse id="image-table-view" class="table-responsive-xl">
-        <table class="table table-hover table-sm">
-          <thead class="thead-light">
-            <tr>
-              <th>DEPLOY</th>
-              <th>REPOSITORY</th>
-              <th>STATUS</th>
-              <th>IMAGE ID</th>
-              <th>CREATED</th>
-              <th>SIZE</th>
-              <th colspan="2">OPERATION</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="image in images">
-              <td @click="deployImage(image.tag)">Deploy</td>
-              <td>${ image.tag }</td>
-              <td><b-badge :variant="badge[image.status]">${ image.status }</b-badge></td>
-              <td :style="'color:#'+image.id.substr(0, 6)">${ image.id }</td>
-              <td>${ image.created }</td>
-              <td>${ image.size }</td>
-              <td @click="removeImage(image.tag)">Remove</td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- <div class="card"> -->
+      <!-- <div class="card-header btn" v-b-toggle.image-table-view> -->
+        <!-- <h3 class="card-title">Image Table View -->
+          <!-- <i class="when-opened icono-caretDownSquare"></i> -->
+          <!-- <i class="when-closed icono-caretRightSquare"></i> -->
+        <!-- </h3> -->
       <!-- </div> -->
-      </b-collapse>
-     </div>
+      <!-- <b-collapse id="image-table-view" class="table-responsive-xl"> -->
+        <!-- <table class="table table-hover table-sm"> -->
+          <!-- <thead class="thead-light"> -->
+            <!-- <tr> -->
+              <!-- <th>DEPLOY</th> -->
+              <!-- <th>REPOSITORY</th> -->
+              <!-- <th>STATUS</th> -->
+              <!-- <th>IMAGE ID</th> -->
+              <!-- <th>CREATED</th> -->
+              <!-- <th>SIZE</th> -->
+              <!-- <th colspan="2">OPERATION</th> -->
+            <!-- </tr> -->
+          <!-- </thead> -->
+          <!-- <tbody> -->
+            <!-- <tr v-for="image in images"> -->
+              <!-- <td @click="deployImage(image.tag)">Deploy</td> -->
+              <!-- <td>${ image.tag }</td> -->
+              <!-- <td><b-badge :variant="badge[image.status]">${ image.status }</b-badge></td> -->
+              <!-- <td :style="'color:#'+image.id.substr(0, 6)">${ image.id }</td> -->
+              <!-- <td>${ image.created }</td> -->
+              <!-- <td>${ image.size }</td> -->
+              <!-- <td @click="removeImage(image.tag)">Remove</td> -->
+            <!-- </tr> -->
+          <!-- </tbody> -->
+        <!-- </table> -->
+      <!-- </b-collapse> -->
+    <!-- </div> -->
     <!-- image table view end-->
     <!-- container view -->
     <div id="v-container" class="card">
