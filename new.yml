@@ -1,0 +1,18 @@
+- autodeploy: true
+  containername: taskindocker
+  inheritvolume: true
+  name: xenocider/taskindocker:latest
+  parameters:
+    detach: true
+    environment:
+      USER_LOGIN: XenosLu
+    hostname: taskindocker
+    network_mode: bridge
+    ports:
+      8888/tcp: 28888
+    restart_policy:
+      Name: always
+    volumes:
+      /var/run/docker.sock:
+        bind: /var/run/docker.sock
+        mode: rw

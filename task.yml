@@ -197,7 +197,7 @@
     detach: true
     environment:
       USER_LOGIN: XenosLu
-    hostname: cap
+    hostname: taskindocker
     network_mode: bridge
     ports:
       8888/tcp: 28888
