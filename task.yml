@@ -138,33 +138,6 @@
         bind: /down
         mode: rw
 - autodeploy: true
-  containername: workspace
-  name: xenocider/container:workspace
-  parameters:
-    detach: true
-    hostname: workspace
-    ports:
-      22/tcp: 10022
-    restart_policy:
-      Name: always
-    tty: true
-    volumes:
-      /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant:
-        bind: /vagrant
-        mode: rw
-      /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant/keys/authorized_keys:
-        bind: /root/.ssh/authorized_keys
-        mode: rw
-      /share/CACHEDEV1_DATA/Utilities/onedrive/scriptz/docker_util.sh:
-        bind: /usr/local/bin/x
-        mode: rw
-      /share/CACHEDEV1_DATA/:
-        bind: /nas
-        mode: rw
-      /var/run/docker.sock:
-        bind: /var/run/docker.sock
-        mode: rw
-- autodeploy: true
   containername: cap
   inheritvolume: true
   name: xenocider/cap:master
@@ -207,3 +180,36 @@
       /var/run/docker.sock:
         bind: /var/run/docker.sock
         mode: rw
+        
+        
+- autodeploy: true
+  containername: workspace
+  name: xenocider/container:workspace
+  parameters:
+    detach: true
+    hostname: workspace
+    ports:
+      22/tcp: 10022
+    restart_policy:
+      Name: always
+    tty: true
+    volumes:
+      /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant:
+        bind: /vagrant
+        mode: rw
+      /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant/keys/authorized_keys:
+        bind: /root/.ssh/authorized_keys
+        mode: rw
+      /share/CACHEDEV1_DATA/Utilities/onedrive/scriptz/docker_util.sh:
+        bind: /usr/local/bin/x
+        mode: rw
+      /share/CACHEDEV1_DATA/:
+        bind: /nas
+        mode: rw
+      /share:
+        bind: /share
+        mode: rw
+      /var/run/docker.sock:
+        bind: /var/run/docker.sock
+        mode: rw
+    privileged: true
