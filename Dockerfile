@@ -11,4 +11,5 @@ ENV GITHUB_CLIENT_ID ""
 ENV GITHUB_CLIENT_SECRET ""
 VOLUME /cap/config
 EXPOSE 8888
+WORKDIR /cap
 CMD ["/usr/bin/python3", "/cap/cap.py"]
