@@ -4,11 +4,11 @@
   parameters:
     detach: true
     hostname: xlmp
-    log_config:
-      config:
-        syslog-address: tcp://nas:1514
-        tag: '{{.Name}}'
-      type: syslog
+    # log_config:
+      # config:
+        # syslog-address: tcp://nas:1514
+        # tag: '{{.Name}}'
+      # type: syslog
     mac_address: 02:42:19:12:08:23
     network_mode: qnet-dhcp-eth0-6d6da6
     restart_policy:
@@ -76,11 +76,11 @@
   parameters:
     detach: true
     hostname: cap
-    log_config:
-      config:
-        syslog-address: tcp://nas:1514
-        tag: '{{.Name}}'
-      type: syslog
+    # log_config:
+      # config:
+        # syslog-address: tcp://nas:1514
+        # tag: '{{.Name}}'
+      # type: syslog
     network_mode: bridge
     ports:
       8888/tcp: 18888
