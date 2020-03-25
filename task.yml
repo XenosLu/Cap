@@ -197,7 +197,7 @@
       /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant:
         bind: /vagrant
         mode: rw
-      /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant/keys/authorized_keys:
+      /share/CACHEDEV1_DATA/Utilities/onedrive/vagrant/ssh/authorized_keys:
         bind: /root/.ssh/authorized_keys
         mode: rw
       /share/CACHEDEV1_DATA/Utilities/onedrive/scriptz/docker_util.sh:
