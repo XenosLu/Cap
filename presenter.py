@@ -127,7 +127,7 @@ def stop_and_rename_container(name):
         return None
     container.rename('%s_old_%s' % (name, digit_now()))
     container.stop()
-    container.update(restart_policy = {'Name': ''}
+    container.update(restart_policy = {'Name': ''})
     return container
 
 
