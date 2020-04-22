@@ -10,7 +10,7 @@ from peewee import Model, SqliteDatabase, CharField, DateTimeField, BooleanField
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))  # set file path as current
 
-database = SqliteDatabase('config/test10.db')
+database = SqliteDatabase('config/cap.db')
 
 class JsonField(CharField):
     """model field to store data in json"""
