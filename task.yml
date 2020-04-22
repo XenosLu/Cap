@@ -148,11 +148,11 @@
       GITHUB_CLIENT_SECRET: 9213df158932d25fa3256897f0b267cb2d1adacf
       USER_LOGIN: XenosLu
     hostname: cap
-    log_config:
-      config:
-        syslog-address: tcp://nas:1514
-        tag: '{{.Name}}'
-      type: syslog
+    # log_config:
+      # config:
+        # syslog-address: tcp://nas:1514
+        # tag: '{{.Name}}'
+      # type: syslog
     network_mode: bridge
     ports:
       8888/tcp: 18888
