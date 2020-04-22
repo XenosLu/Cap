@@ -244,6 +244,7 @@ def get_images():
                 'status': get_image_status(image),
                 'id': image.id[7:19],
                 'tag': task.name,
+                'containername': task.containername,
                 'autodeploy': task.autodeploy,
                 'created': get_datetime(image.attrs['Created']).strftime(TIME_FORMAT),
                 'size': get_size(image.attrs['Size']),
