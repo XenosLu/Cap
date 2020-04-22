@@ -91,7 +91,8 @@ footer {
             <div v-for="image in images" class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-2" :key="image.tag">
               <div class="card bg-light">
                 <div class="card-header btn" v-b-toggle="'image-card-' + image.tag">
-                  <h6 class="card-title">${ image.tag }</h6>
+                  <h5 class="card-title">${ image.containername }</h5>
+                  <h6 class="card-title"><small>${ image.tag }</small></h6>
                   <b-badge :variant="badge[image.status]">${ image.status }</b-badge>
                   <b-badge v-show="image.last_build_state != 'Success'" :variant="badge[image.last_build_state]">${ image.last_build_state }</b-badge>
                 </div>
