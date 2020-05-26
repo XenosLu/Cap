@@ -35,11 +35,9 @@ def authenticated_async(login=LOGIN):
                 self.redirect(oauth.get_authorize_url())
             res = await oauth.get_user_with_cache(token)
             if login and not res.get('login') == login:
-                logging.info(login)
-                logging.info(res)
-                logging.info(res.get('login'))
-                logging.info('401')
-                self.send_error(401)
+                logging.info('unauthorized request user: %s' % res.get('login'))
+                self.write('401')
+                # self.send_error(401)
                 return
             self.current_user = res.get('login')
             logging.info('user login: %s' % self.current_user)
