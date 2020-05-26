@@ -222,7 +222,7 @@ def check_update(task_name):
         logging.info(exc)
         return None
     except Exception as exc:
-        logging.warning(exc, exc_info=True)
+        logging.warning(exc, exc_info=False)
         logging.info('docker pull error! sleep 120s')
         time.sleep(99)
         return None
