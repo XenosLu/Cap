@@ -90,7 +90,9 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
         logging.debug(token)
         res = await oauth.get_user_with_cache(token)
         if LOGIN and not res.get('login') == LOGIN:
+            logging.info('401')
             self.close(401)
+            logging.info('after 401')
             return
         self.current_user = res.get('login')
 
