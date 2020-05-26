@@ -244,5 +244,5 @@ LinkWebSocketHandler.run_task()
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))  # set file path as current
-    APP.listen(8888)
+    APP.listen(8888, xheaders=True)
     tornado.ioloop.IOLoop.instance().start()
