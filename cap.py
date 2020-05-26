@@ -232,7 +232,7 @@ APP = tornado.web.Application(HANDLERS, **SETTINGS)
 tornado.ioloop.PeriodicCallback(prune_images, 1800000).start()
 
 loop = asyncio.get_event_loop()
-loop.create_task(check_build_status_coroutine(LinkWebSocketHandler.callback_notification))
+# loop.create_task(check_build_status_coroutine(LinkWebSocketHandler.callback_notification))
 # loop.create_task(auto_update_coroutine())
 loop.create_task(retrieve_state_coroutine())
 
