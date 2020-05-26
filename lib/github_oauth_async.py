@@ -16,9 +16,9 @@ class GithubOauthAsync:
 
     def __init__(self, client_id=None, client_secret=None, redirect_uri=''):
         if not client_id:
-            client_id = os.environ.get('GITHUB_CLIENT_ID')
+            client_id = os.environ.get('GITHUB_CLIENT_ID', 'fd50922eacf5843c9ac3')
         if not client_secret:
-            client_secret = os.environ.get('GITHUB_CLIENT_SECRET')
+            client_secret = os.environ.get('GITHUB_CLIENT_SECRET', '34a99a908f61d106688897a2882547c6d712b6f2')
         self.client_id = client_id
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri
