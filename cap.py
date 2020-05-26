@@ -89,7 +89,7 @@ class LinkWebSocketHandler(tornado.websocket.WebSocketHandler):
         token = self.get_secure_cookie('github_access_token')
         logging.debug(token)
         res = await oauth.get_user_with_cache(token)
-        if not res.get('login') == LOGIN:
+        if LOGIN and not res.get('login') == LOGIN:
             self.close(401)
             return
         self.current_user = res.get('login')
