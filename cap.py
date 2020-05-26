@@ -188,7 +188,7 @@ async def retrieve_state_coroutine():
             LinkWebSocketHandler.write_message_all(state)
             LinkWebSocketHandler.last_message = state.copy()
         while not LinkWebSocketHandler.users:
-            logging.info('sleep')
+            logging.debug('sleep')
             await asyncio.sleep(1)
         await asyncio.sleep(2.8)
 
