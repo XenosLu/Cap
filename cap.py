@@ -22,7 +22,7 @@ from lib.github_oauth_async import GithubOauthAsync
 
 asyncio.set_event_loop_policy(AnyThreadEventLoopPolicy())
 
-LOGIN = os.environ.get('USER_LOGIN', 'XenosLu')
+LOGIN = os.environ.get('USER_LOGIN')
 
 oauth = GithubOauthAsync()
 
@@ -34,7 +34,7 @@ def authenticated_async(login=LOGIN):
             if not token:
                 self.redirect(oauth.get_authorize_url())
             res = await oauth.get_user_with_cache(token)
-            if not res.get('login') == login:
+            if login and not res.get('login') == login:
                 logging.info('401')
                 self.send_error(401)
                 return
