@@ -18,11 +18,11 @@
         mode: rw
 
 - autodeploy: true
-  containername: workspace
-  name: xenocider/container:workspace
+  containername: ubuntu-desktop
+  name: xenocider/container:ubuntu-desktop
   parameters:
     detach: true
-    hostname: workspace
+    hostname: ubuntu-desktop
     ports:
       22/tcp: 10022
     restart_policy:
