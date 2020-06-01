@@ -17,7 +17,7 @@
         bind: /var/run/docker.sock
         mode: rw
 
-- autodeploy: true
+- autodeploy: false
   containername: ubuntu-desktop
   name: xenocider/container:ubuntu-desktop
   parameters:
