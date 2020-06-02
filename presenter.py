@@ -213,6 +213,7 @@ def update_job_coroutine():
 def check_update(task_name):
     """check image update"""
     logging.debug('checking %s', task_name)
+    time0 = time.time()
     # run docker pull
     try:
         client = get_docker_client()
@@ -227,7 +228,7 @@ def check_update(task_name):
         time.sleep(99)
         return None
     if not update_image in current_list:
-        logging.info('image %s updated.', task_name)
+        logging.info('image %s updated. cost %.02f seconds', task_name, time.time() - time0)
         logging.info(
             'created: %s', get_datetime(update_image.attrs['Created']).strftime(TIME_FORMAT))
         return update_image
