@@ -48,3 +48,34 @@
         bind: /var/run/docker.sock
         mode: rw
     privileged: true
+- autodeploy: false
+  containername: ubuntu-desktop
+  name: xenocider/container:ubuntu-desktop
+  parameters:
+    detach: true
+    hostname: ubuntu-desktop
+    ports:
+      22/tcp: 22222
+    restart_policy:
+      Name: always
+    tty: true
+    volumes:
+      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant:
+        bind: /vagrant
+        mode: rw
+      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/ssh/authorized_keys:
+        bind: /root/.ssh/authorized_keys
+        mode: rw
+      /share/CACHEDEV1_DATA/Utilities/onedrivex/scriptz/docker_util.sh:
+        bind: /usr/local/bin/x
+        mode: rw
+      /share/CACHEDEV1_DATA/:
+        bind: /nas
+        mode: rw
+      /share:
+        bind: /share
+        mode: rw
+      /var/run/docker.sock:
+        bind: /var/run/docker.sock
+        mode: rw
+    privileged: true
