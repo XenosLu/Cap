@@ -32,6 +32,28 @@
       /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/home:
         bind: /root
         mode: rw
+      /share:
+        bind: /share
+        mode: rw
+      /var/run/docker.sock:
+        bind: /var/run/docker.sock
+        mode: rw
+    privileged: true
+- autodeploy: true
+  containername: workspace
+  name: xenocider/container:workspace
+  parameters:
+    detach: true
+    hostname: workspace
+    ports:
+      22/tcp: 10022
+    restart_policy:
+      Name: always
+    tty: true
+    volumes:
+      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant:
+        bind: /vagrant
+        mode: rw
       /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/ssh/authorized_keys:
         bind: /root/.ssh/authorized_keys
         mode: rw
