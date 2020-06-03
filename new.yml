@@ -51,17 +51,8 @@
       Name: always
     tty: true
     volumes:
-      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant:
-        bind: /vagrant
-        mode: rw
-      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/ssh/authorized_keys:
-        bind: /root/.ssh/authorized_keys
-        mode: rw
-      /share/CACHEDEV1_DATA/Utilities/onedrivex/scriptz/docker_util.sh:
-        bind: /usr/local/bin/x
-        mode: rw
-      /share/CACHEDEV1_DATA/:
-        bind: /nas
+      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/home:
+        bind: /root
         mode: rw
       /share:
         bind: /share
