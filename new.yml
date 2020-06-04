@@ -16,29 +16,6 @@
       /var/run/docker.sock:
         bind: /var/run/docker.sock
         mode: rw
-
-- autodeploy: false
-  containername: elementary-desktop
-  name: xenocider/container:elementary-desktop
-  parameters:
-    detach: true
-    hostname: elementary-desktop
-    ports:
-      22/tcp: 22222
-    restart_policy:
-      Name: always
-    tty: true
-    volumes:
-      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/home:
-        bind: /root
-        mode: rw
-      /share:
-        bind: /share
-        mode: rw
-      /var/run/docker.sock:
-        bind: /var/run/docker.sock
-        mode: rw
-    privileged: true
 - autodeploy: true
   containername: workspace
   name: xenocider/container:workspace
