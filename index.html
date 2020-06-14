@@ -93,7 +93,7 @@ footer {
                 <div class="card-header btn" v-b-toggle="'image-card-' + image.tag">
                   <h5 class="card-title">${ image.containername }</h5>
                   <h6 class="card-title"><small>${ image.tag }</small></h6>
-                  <h4>${ image.tag.substring(0, image.tag.indexOf('.')) }</h4>
+                  <h4>${ image.tag.substring(0, image.tag.indexOf(':')) }</h4>
                   <b-badge :variant="badge[image.status]">${ image.status }</b-badge>
                   <b-badge v-show="image.last_build_state != 'Success'" :variant="badge[image.last_build_state]">${ image.last_build_state }</b-badge>
                 </div>
@@ -115,7 +115,7 @@ footer {
                         <input :data-target="image.tag" v-model="image.autodeploy" type="checkbox" data-handle-width="20" data-label-width="18" data-on-color="success" data-on-text="" data-off-text="" />
                       </b-list-group-item>
                       <b-list-group-item variant="success" button
-                        :href="'https://hub.docker.com/repository/docker/' + image.tag.substring(0, image.tag.indexOf('.')) + '/builds'">
+                        :href="'https://hub.docker.com/repository/docker/' + image.tag.substring(0, image.tag.indexOf(':')) + '/builds'">
                         Docker hub
                       </b-list-group-item>
                       <b-list-group-item @click="deployImage(image.tag)" variant="primary" button>
