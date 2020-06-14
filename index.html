@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=1.0, user-scalable=0, minimal-ui">
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="/static/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="/static/css/bootstrap4.5.0.min.css" rel="stylesheet">
     <link href="/static/css/bootstrap-switch.min.css" rel="stylesheet">
     <link href="/static/css/icono.css" rel="stylesheet">
     <link href="/static/css/bootstrap-vue.css" rel="stylesheet">
@@ -31,7 +32,8 @@ footer {
     </style>
     <script src="/static/js/vue.min.js"></script>
     <!-- <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script> -->
-    <script src="/static/js/bootstrap-vue.js"></script>
+    <!-- <script src="/static/js/bootstrap-vue.js"></script> -->
+    <script src="/static/js/bootstrap-vue.min.js"></script>
     <title>Cap</title>
   </head>
 <body>
@@ -93,10 +95,6 @@ footer {
                 <div class="card-header btn" v-b-toggle="'image-card-' + image.tag">
                   <h5 class="card-title">${ image.containername }</h5>
                   <h6 class="card-title"><small>${ image.tag }</small></h6>
-                  <h6>
-                    <a target="_blank" class="btn btn-secondary"
-                      :href="'https://hub.docker.com/repository/docker/' + image.tag.substring(0, image.tag.indexOf(':')) + '/builds'">docker hub</a>
-                  </h6>
                   <b-badge :variant="badge[image.status]">${ image.status }</b-badge>
                   <b-badge v-show="image.last_build_state != 'Success'" :variant="badge[image.last_build_state]">${ image.last_build_state }</b-badge>
                 </div>
@@ -133,6 +131,11 @@ footer {
                 <div class="card-footer text-center">
                   <!-- <b-badge :variant="badge[image.last_build_state]">${ image.last_build_state }</b-badge> -->
                   <!-- <br> -->
+                  <h6>
+                    <a target="_blank" class="btn btn-secondary rounded-0"
+                      :href="'https://hub.docker.com/repository/docker/' + image.tag.substring(0, image.tag.indexOf(':')) + '/builds'">docker hub</a>
+                      
+                  </h6>
                   <small class="text-muted">${ image.last_updated }</small>
                 </div>
               </div>
