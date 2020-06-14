@@ -1,5 +1,6 @@
 # Cap docker demo
-FROM xenocider/container:python3.7.4
+# FROM xenocider/container:python3.7.4
+FROM xenocider/image:python3.8.3
 LABEL maintainer="xenos <xenos.lu@gmail.com>"
 
 COPY . /cap
