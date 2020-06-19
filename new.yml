@@ -60,3 +60,24 @@
         bind: /var/run/docker.sock
         mode: rw
     privileged: true
+    
+- autodeploy: false
+  containername: kodi
+  name: xenocider/container:kodi
+  parameters:
+    detach: true
+    hostname: kodi
+    mac_address: 02:42:19:89:05:06
+    network_mode: qnet-dhcp-eth0-6d6da6
+    restart_policy:
+      Name: always
+    devices:
+    - /dev/dri:/dev/dri:rwm
+    - /dev/snd:/dev/snd:rwm
+    volumes:
+      /share/CACHEDEV1_DATA/Utilities/onedrivex/vagrant/home:
+        bind: /root
+        mode: rw
+      /share:
+        bind: /share
+        mode: rw
