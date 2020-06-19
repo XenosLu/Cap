@@ -63,14 +63,14 @@
     
 - autodeploy: false
   containername: kodi
-  name: xenocider/container:kodi
+  name: xenocider/container:ubuntu-desktop
   parameters:
+    auto_remove: true
+    privileged: true
     detach: true
     hostname: kodi
     mac_address: 02:42:19:89:05:06
     network_mode: qnet-dhcp-eth0-6d6da6
-    restart_policy:
-      Name: always
     devices:
     - /dev/dri:/dev/dri:rwm
     - /dev/snd:/dev/snd:rwm
@@ -81,3 +81,6 @@
       /share:
         bind: /share
         mode: rw
+    command :
+    - /bin/sh
+    - /startkodi
