@@ -63,7 +63,7 @@
     
 - autodeploy: false
   containername: kodi
-  name: xenocider/container:ubuntu-desktop
+  name: docker.io/xenocider/container:ubuntu-desktop
   parameters:
     privileged: true
     detach: true
