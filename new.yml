@@ -65,10 +65,11 @@
   containername: kodi
   name: xenocider/container:ubuntu-desktop
   parameters:
-    auto_remove: true
     privileged: true
     detach: true
     hostname: kodi
+    restart_policy:
+      Name: always
     mac_address: 02:42:19:89:05:06
     network_mode: qnet-dhcp-eth0-6d6da6
     devices:
