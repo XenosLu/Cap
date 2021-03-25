@@ -1,6 +1,6 @@
 tornado==6.0.3
 peewee==3.6.4
-pyyaml==5.1
+pyyaml==5.4
 # docker==3.6.0
 requests-async==0.6.2
 docker==3.7.3
